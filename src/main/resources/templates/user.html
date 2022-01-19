@@ -1,11 +1,70 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Spring Security Example</title>
+    <meta charset="UTF-8"/>
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .user-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: left;
+        }
+        .user-card p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #555;
+        }
+        .user-card p strong {
+            color: #333;
+            font-weight: bold;
+        }
+        .buttonLogout {
+            background-color: deepskyblue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .buttonLogout:hover {
+            background-color: #00aaff;
+        }
+    </style>
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
-
-
+<h1 th:utext="${user.username}">User Profile</h1>
+<div class="user-card">
+    <p><strong>User ID:</strong> <span th:text="${user.userId}">UserId</span></p>
+    <p><strong>Name:</strong> <span th:text="${user.name}">Name</span></p>
+    <p><strong>Surname:</strong> <span th:text="${user.surname}">Surname</span></p>
+    <p><strong>Age:</strong> <span th:text="${user.age}">Age</span></p>
+    <p><strong>Email:</strong> <span th:text="${user.email}">Email</span></p>
+</div>
+<div style="text-align:center;">
+    <button class="buttonLogout" onclick="window.location.href = '/logout';">Logout</button>
+</div>
 </body>
 </html>

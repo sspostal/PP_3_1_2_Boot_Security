@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .buttonAdd {
+            background-color: #28a745;
+            color: white;
+        }
+        .buttonLogout {
+            background-color: #0048ff;
+            color: white;
+            float: right;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background-color: #007BFF;
+            color: white;
+        }
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+        .buttonEdit {
+            background-color: gold;
+            color: black;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+        .buttonEdit:hover {
+            background-color: #e6c200;
+        }
+        .buttonDelete {
+            background-color: #fd3434;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+        .buttonDelete:hover {
+            background-color: #c62828;
+        }
+    </style>
+</head>
+<body>
+<h1>Users</h1>
+<button class="buttonAdd" onclick="window.location.href = '/admin/new';">Add New User</button>
+<table>
+    <tr>
+        <th>User_Id</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.userId}">UserId</td>
+        <td th:text="${user.username}">Username</td>
+        <td th:text="${user.name}">Name</td>
+        <td th:text="${user.surname}">Surname</td>
+        <td th:text="${user.age}">Age</td>
+        <td th:text="${user.email}">Email</td>
+        <td>
+            <form th:action="@{'/admin/edit/' + ${user.userId}}" method="get">
+                <input class="buttonEdit" type="submit" value="Edit"/>
+            </form>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{'/admin/delete/' + ${user.userId}}">
+                <input class="buttonDelete" type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+</table>
+<button class="buttonLogout" onclick="window.location.href = '/logout';">Logout</button>
+</body>
+</html>
