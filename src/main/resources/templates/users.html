@@ -101,7 +101,8 @@
             </form>
         </td>
         <td>
-            <form th:method="DELETE" th:action="@{'/admin/delete/' + ${user.userId}}">
+            <form th:action="@{/admin/delete}" method="post">
+                <input type="hidden" name="id" th:value="${user.userId}"/>
                 <input class="buttonDelete" type="submit" value="Delete"/>
             </form>
         </td>
